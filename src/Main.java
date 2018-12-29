@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Main{
-    public static int num=0;
+    public static int num=-1;
     public static BufferedImage image;
     public static JFrame jFrame=new JFrame("test");
     public static JPanel jPanel=new JPanel(new FlowLayout());
@@ -16,11 +16,13 @@ public class Main{
         jFrame.setSize(500,1000);
     }
     public static void main(String[] args)  throws Exception {
-        String filePath="D:\\tencent\\spine images\\spine images";
+        String filePath="D:\\l\\spine images";
         File baseFile=new File(filePath);
         File[] files=baseFile.listFiles();
         for (int i=0;i<files.length;i++){
 //            files[i].renameTo(new File(filePath+"\\"+String.valueOf(i+1)+".jpg"));
+//            String[] name=files[i].getName().split("\\.");
+//            files[i].renameTo(new File(filePath+"\\"+name[0]+".bmp"));
         }
 
         changeImage(files);
@@ -28,6 +30,16 @@ public class Main{
         ActionListener listener=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
+                JButton button=(JButton)e.getSource();
+                if(button.getText().equals("-1")){
+                    files[num].renameTo(new File(filePath+"\\"+String.valueOf(num+1)+"_-1"+".jpg"));
+                }
+                else if(button.getText().equals("0")){
+                    files[num].renameTo(new File(filePath+"\\"+String.valueOf(num+1)+"_0"+".jpg"));
+                }
+                else {
+                    files[num].renameTo(new File(filePath+"\\"+String.valueOf(num+1)+"_1"+".jpg"));
+                }
                 changeImage(files);
             }
         };
